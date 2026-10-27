@@ -2,7 +2,7 @@
 
 Static site for https://shweu.app (ShweU / ရွှေဥ): landing page, Privacy Policy (/privacy/), Terms of Use (/terms/). Plain HTML/CSS, no build step. Hosted on GitHub Pages.
 
-Legal text is copied from the ShweU legal drafts (privacy-policy.html, terms.html); only blakeforge.org/shweu URLs were changed to shweu.app. Keep them in sync.
+Legal text is copied unchanged from the ShweU legal drafts (privacy-policy.html, terms.html), which now use the shweu.app URLs. Keep them in sync.
 
 ## Publish
 1. Create a public GitHub repo `shweu-site`, push this folder to `main`.
