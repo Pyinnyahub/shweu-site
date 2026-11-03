@@ -11,7 +11,12 @@
   };
   var q=new URLSearchParams(location.search), h=new URLSearchParams(location.hash.replace(/^#/,""));
   function g(k){return q.get(k)||h.get(k)||"";}
-  var lang=g("lang")==="en"?"en":"my";
+  function norm(l){l=(l||"").toLowerCase();return (/^(my|mya|bur)\b/.test(l)||/^(my|mya|bur)(-|_|$)/.test(l))?"my":(l?"en":"");}
+  var lang=g("lang");
+  lang=(lang==="my"||lang==="en")?lang:"";
+  var saved="";try{saved=localStorage.getItem("shweu_lang")||"";}catch(e){}
+  if(!lang&&(saved==="my"||saved==="en"))lang=saved;
+  if(!lang){var ls=navigator.languages&&navigator.languages.length?navigator.languages:[navigator.language||""];lang=norm(ls[0])||"en";}
   var state=document.body.getAttribute("data-state");
   var err=g("error")+" "+g("error_code");
   // Supabase reports a used/expired link as error=access_denied&error_code=otp_expired (hash or query).
@@ -38,5 +43,6 @@
     var l=a.getAttribute("data-lang"); if(l===lang)a.className="on";
     var p=new URLSearchParams(location.search); p.set("lang",l);
     a.href=location.pathname+"?"+p.toString()+location.hash;
+    a.addEventListener("click",function(){try{localStorage.setItem("shweu_lang",l);}catch(e){}});
   });
 })();
