@@ -6,4 +6,5 @@
 - Fallback pages: one language chosen by `?lang=my|en` → saved toggle (localStorage `shweu_lang`) → browser language; static default English. Buttons open `shweu://confirm`, `shweu://reset-password`, `shweu://`, passing Supabase tokens through. `otp_expired` → expired state.
 - Colours: cream #FFF8E0, gold #D4A33B, maroon #340B0A / #6B0F1A. No emoji.
 - Never push/publish without "တင်ပါ". Commit author `git -c user.name=Pyinnyahub -c user.email=maungprofessional@gmail.com commit`. Do not touch the BLAKE FORGE website repo.
+- Contact address (since 2026-11-09): `support@shweu.app` (Namecheap forward to Gmail; replies via Gmail Send-as + Resend SMTP). `email-logo.png` (192 px, from the app icon) is for the support email signature: `https://shweu.app/email-logo.png`.
 - TODO: App Store badge is a "Coming soon" placeholder until launch.
