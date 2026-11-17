@@ -1,4 +1,5 @@
-// Shared profile page: https://shweu.app/p/?u=<profile id> (2026-11-17).
+// Shared profile page: https://shweu.app/p/?u=<profile id> (2026-11-17), and
+// https://shweu.app/@<username> (404.html sends it here as ?h=<username>).
 // Shows the name, photo and bio of a Pro / Business / ShweU profile and opens the app with
 // shweu://profile/<id>. Any other case (bad id, plain user, network error) keeps the
 // general text and still opens the app. Only the publishable key is used here: the same
@@ -37,14 +38,22 @@
   });
 
   var id=(q.get("u")||"").toLowerCase();
-  if(!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(id))return;
-  el("open").href="shweu://profile/"+id;
+  var h=(q.get("h")||"").toLowerCase();
+  var filter;
+  if(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(id)){
+    el("open").href="shweu://profile/"+id;
+    filter="id=eq."+id;
+  }else if(/^[a-z0-9_.]{3,20}$/.test(h)&&h.charAt(0)!=="."&&h.charAt(h.length-1)!=="."&&h.indexOf("..")<0){
+    filter="handle=eq."+encodeURIComponent(h);
+  }else{return;}
 
-  fetch(API+"/rest/v1/profiles?id=eq."+id+"&select=display_name,about,avatar_path,role",{headers:{apikey:KEY}})
+  fetch(API+"/rest/v1/profiles?"+filter+"&select=id,display_name,about,avatar_path,role,handle",{headers:{apikey:KEY}})
     .then(function(r){return r.ok?r.json():[];})
     .then(function(rows){
       var p=rows&&rows[0];
       if(!p||!t.roles[p.role])return;
+      if(p.id)el("open").href="shweu://profile/"+p.id;
+      if(p.handle){el("handle").textContent="@"+p.handle;el("handle").hidden=false;}
       var name=(p.display_name||"").trim();
       if(!name)return;
       el("name").textContent=name;
