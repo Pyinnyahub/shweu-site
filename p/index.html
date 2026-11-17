@@ -18,6 +18,9 @@
 .pf-handle{font-size:14px;opacity:.75;margin-top:-6px}
 .pf-handle[hidden]{display:none}
 .pf-about{white-space:pre-line;max-height:8.5em;overflow:hidden}
+.pf-fail{color:var(--maroon2);font-weight:700}
+.fb-btn[hidden],#avatar-x[hidden]{display:none}
+.fb-btn.line{background:none;border:2px solid var(--gold);margin-top:14px}
 </style>
 </head>
 <body class="fb">
@@ -27,11 +30,12 @@
 </header>
 <main class="fb-main">
 <div class="fb-card">
-<div class="pf-av"><img id="avatar" alt="" hidden><svg id="avatar-none" width="54" height="54" viewBox="0 0 24 24" fill="none" stroke="#D4A33B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8.5" r="3.8"/><path d="M4.5 20c.9-3.6 3.9-5.4 7.5-5.4s6.6 1.8 7.5 5.4"/></svg></div>
+<div class="pf-av"><img id="avatar" alt="" hidden><svg id="avatar-none" width="54" height="54" viewBox="0 0 24 24" fill="none" stroke="#D4A33B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8.5" r="3.8"/><path d="M4.5 20c.9-3.6 3.9-5.4 7.5-5.4s6.6 1.8 7.5 5.4"/><path id="avatar-x" d="M16 4l4 4M20 4l-4 4" hidden/></svg></div>
 <h1 id="name">ShweU</h1>
 <div class="pf-handle" id="handle" hidden></div>
 <div class="pf-role" id="role" hidden></div>
 <p class="fb-p pf-about" id="about">Open this profile in the ShweU app.</p>
+<a class="fb-btn" id="retry" href="#" role="button" hidden>Try again</a>
 <a class="fb-btn" id="open" href="shweu://">Open in the ShweU app</a>
 <div class="fb-alt">
 <div id="noapp">Don't have the app yet?</div>
