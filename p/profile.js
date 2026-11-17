@@ -40,11 +40,15 @@
   var id=(q.get("u")||"").toLowerCase();
   var h=(q.get("h")||"").toLowerCase();
   var filter;
-  if(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(id)){
+  // A username link (?h=) never takes ?u= as well: shweu.app/@name must show that name's
+  // profile only (review 2026-11-18).
+  if(h){
+    if(/^[a-z0-9_.]{3,20}$/.test(h)&&h.charAt(0)!=="."&&h.charAt(h.length-1)!=="."&&h.indexOf("..")<0){
+      filter="handle=eq."+encodeURIComponent(h);
+    }else{return;}
+  }else if(/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(id)){
     el("open").href="shweu://profile/"+id;
     filter="id=eq."+id;
-  }else if(/^[a-z0-9_.]{3,20}$/.test(h)&&h.charAt(0)!=="."&&h.charAt(h.length-1)!=="."&&h.indexOf("..")<0){
-    filter="handle=eq."+encodeURIComponent(h);
   }else{return;}
 
   fetch(API+"/rest/v1/profiles?"+filter+"&select=id,display_name,about,avatar_path,role,handle",{headers:{apikey:KEY}})

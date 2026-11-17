@@ -6,7 +6,9 @@
 // shweu.app/@name (profile @username, 2026-11-17): GitHub Pages has no such page, so this
 // 404 page sends it on to the profile page, which looks the name up.
 (function(){var m=location.pathname.match(/^\/@([A-Za-z0-9_.]{3,20})\/?$/);
-if(m){location.replace("/p/?h="+encodeURIComponent(m[1].toLowerCase())+(location.search?"&"+location.search.slice(1):""));}})();
+// Only the language is passed on: any other query (e.g. ?u=) must not change whose profile opens.
+if(m){var l=new URLSearchParams(location.search).get("lang");
+location.replace("/p/?h="+encodeURIComponent(m[1].toLowerCase())+((l==="my"||l==="en")?"&lang="+l:""));}})();
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
